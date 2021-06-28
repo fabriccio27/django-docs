@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 
 from .models import Choice, Question
 
@@ -16,11 +17,17 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list' #en el template tengo los for en base a una variable llamada asi
 
     def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
+        """ __lte es less than or equal """
+        return Question.objects.filter(
+            pub_date__lte=timezone.now()
+        ).order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
     model = Question
     template_name =  "mainApp/detail.html"
+    #esto de aca abajo lo pongo porque tengo que filtrar preguntas que tienen fecha futura a las que podrian llegar por url
+    def get_queryset(self):
+        return Question.objects.filter(pub_date__lte=timezone.now())
 
 class ResultsView(generic.DetailView):
     model = Question

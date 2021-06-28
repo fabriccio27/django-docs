@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'nubica.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 # es necesario instalar psycopg2 si uso postgresql
-DATABASES = {
+""" 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'wdprrtpl',
@@ -83,7 +83,12 @@ DATABASES = {
         'PASSWORD':'V5RS1_fEzizFgvw8orb243LPpNYn30ku',
         'HOST':'tuffi.db.elephantsql.com',
         'PORT':'5432'
-    }   
+    } """
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
+    }
 }
 
 # Password validation
