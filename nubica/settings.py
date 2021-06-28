@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,7 +83,7 @@ DATABASES = {
         'PASSWORD':'V5RS1_fEzizFgvw8orb243LPpNYn30ku',
         'HOST':'tuffi.db.elephantsql.com',
         'PORT':'5432'
-    }
+    }   
 }
 
 # Password validation

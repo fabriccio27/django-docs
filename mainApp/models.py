@@ -13,7 +13,10 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        # si de alguna manera engaño para que pub_date sea en el futuro, para bocha de dias me va a dar true esto
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+        """ return self.pub_date >= timezone.now() - datetime.timedelta(days=1) """
 
     #I could call this later by querying the instance, saving it to a variable and calling q.was_published_recently()
 

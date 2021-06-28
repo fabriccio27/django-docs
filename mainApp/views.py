@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-from django.http import HttpResponseDirect
+from django.http import HttpResponseRedirect
 
 from .models import Choice, Question
 
@@ -13,7 +13,7 @@ class IndexView(generic.ListView):
     <app name>/<model name>_detail.html
     """
     template_name = 'mainApp/index.html'
-    context_object_name = 'latest_question_list'
+    context_object_name = 'latest_question_list' #en el template tengo los for en base a una variable llamada asi
 
     def get_queryset(self):
         return Question.objects.order_by('-pub_date')[:5]
@@ -43,7 +43,8 @@ def vote(request, question_id):
         """ Always return an HttpResponseRedirect after successfully dealing
         with POST data. This prevents data from being posted twice if a
         user hits the Back button. """
-        return HttpResponseRedirect(reverse('mainApp:results', args=(question.id) ))
+        return HttpResponseRedirect(reverse('mainApp:results', args=(question.id,) ))
+        # the comma is important in args, because it stablishes a difference between a tuple and some arguments
         # reverse function helps avoid having to hardcode a URL in the view function. 
         # It is given the name of the view that we want to pass control to, and the variable portion of the URL pattern
         # that points to that view.
