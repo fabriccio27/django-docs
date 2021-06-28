@@ -1,0 +1,10 @@
+<h1>{{question.question_text}}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+    <li>{{choice.choice_text}} | {{choice.votes}} vote{{choice.votes | pluralize}}</li>
+    <!-- pluralize filter it returns a plural suffix if the first argument is an integer greater than 1 
+        or a sequence with more than 1 item. 
+        If a plural suffix isn't specified pluralize defaults to 's'. -->
+    {% endfor %}
+</ul>
+<a href="{% url 'mainApp:detail' question.id %}">Vote again?</a>
