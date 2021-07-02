@@ -1,0 +1,6 @@
+{% for post in posts%}
+    <h2>{{post.title}}</h2>
+    <p>{{post.body}}</p>
+{% empty %}
+    <h3>Sorry, no posts yet.</h3>
+{% endfor %}
