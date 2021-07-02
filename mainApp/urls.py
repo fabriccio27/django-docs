@@ -11,7 +11,9 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name="index"),
     path('<int:pk>/', views.DetailView.as_view(), name="detail"),
     path('<int:pk>/results/', views.ResultsView.as_view(), name="results"),
-    path('<int:question_id>/vote/', views.vote, name="vote")
+    path('<int:question_id>/vote/', views.vote, name="vote"),
+    path('success/', views.success, name="success"),
+    path('upload/', views.upload_file, name="upload_file")
 ]
 
 """ esto es la config de paths para esta app en particular, lo que tengo que hacer es que la URLconfig del project apunte aca """

@@ -5,6 +5,28 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 
 from .models import Choice, Question
+from .forms import UploadFileForm
+from .utils import handle_uploaded_file
+
+def upload_file(request):
+    if request.method=="POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            #file es el atributo del form que hice con FileField
+            """ During file uploads, the actual file data is stored in request.FILES. 
+            Each entry in this dictionary is an UploadedFile object (or a subclass) – a wrapper around an uploaded file.
+            You’ll usually use one of these methods to access the uploaded content: """
+
+            handle_uploaded_file(request.FILES["file"])
+            return HttpResponseRedirect("mainApp/success")
+    else:
+        form = UploadFileForm()
+    return render(request, "mainApp/upload.html", {
+        'form':form
+        })
+        
+def success(request):
+    render(request, 'mainApp/success.html', {})
 
 class IndexView(generic.ListView):
     """ 
